@@ -9,28 +9,28 @@ export default function App() {
 
   return (
     <div className="app-root">
-      <header className="app-header">
+      <header className={`app-header ${route === 'home' ? 'home-header' : ''}`}>
         <div style={{display:'flex',alignItems:'center',gap:10}}>
           <div className="brand" role="button" onClick={() => setRoute('home')}>MyAttendance</div>
         </div>
 
-        <nav className="top-nav">
-          <button className={`nav-btn ${route === 'home' ? 'active' : ''}`} onClick={() => setRoute('home')}>หน้าแรก</button>
-          <button className={`nav-btn ${route === 'attendance' ? 'active' : ''}`} onClick={() => setRoute('attendance')}>เข้า‑ออกงาน</button>
-          <button className={`nav-btn ${route === 'tasks' ? 'active' : ''}`} onClick={() => setRoute('tasks')}>งาน</button>
-          <button className={`nav-btn ${route === 'reports' ? 'active' : ''}`} onClick={() => setRoute('reports')}>รายงาน</button>
-        </nav>
+        {route !== 'home' && (
+          <nav className="top-nav">
+            <button className={`nav-btn ${route === 'home' ? 'active' : ''}`} onClick={() => setRoute('home')}>หน้าแรก</button>
+            <button className={`nav-btn ${route === 'attendance' ? 'active' : ''}`} onClick={() => setRoute('attendance')}>เข้า‑ออกงาน</button>
+            <button className={`nav-btn ${route === 'tasks' ? 'active' : ''}`} onClick={() => setRoute('tasks')}>งาน</button>
+            <button className={`nav-btn ${route === 'reports' ? 'active' : ''}`} onClick={() => setRoute('reports')}>รายงาน</button>
+          </nav>
+        )}
       </header>
 
       <main className="app-main">
-        {route === 'home' && <Home />}
+        {route === 'home' && <Home onStart={() => setRoute('attendance')} />}
         {route === 'attendance' && <Attendance />}
         {route === 'tasks' && <Tasks />}
         {route === 'reports' && <Reports />}
       </main>
       <footer className="app-footer">© {new Date().getFullYear()} MyAttendance</footer>
-
-      <StartupPopup visible={showStartup} onClose={() => setShowStartup(false)} onStart={() => { setShowStartup(false); setRoute('attendance') }} />
     </div>
   )
 }
