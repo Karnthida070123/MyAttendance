@@ -86,13 +86,7 @@ body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe
 
 .records{margin-top:18px}
 .records-header{display:flex;align-items:center;justify-content:space-between}
-.records-actions{display:flex;gap:14px;align-items:center}
-@media (max-width:640px){
-  /* On small screens stack actions vertically and increase spacing so the danger button
-     ("ลบทั้งหมด") is clearly separated from the copy JSON button. */
-  .records-actions{flex-direction:column;align-items:flex-end;gap:18px}
-  .records-actions .btn.danger{margin-top:8px}
-}
+.records-actions{display:flex;gap:14px;align-items:center} 
 .record-list{list-style:none;padding:0;margin:8px 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
 .record-item{display:flex;gap:8px;background:transparent;border-radius:12px;padding:10px;align-items:center;border:1px solid rgba(255,255,255,0.03);transition:transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease, background 220ms ease;animation:fadeUp 320ms ease}
 .record-item:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(2,6,23,0.6);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
@@ -135,11 +129,27 @@ body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe
 
 /* Mobile adjustments */
 @media (max-width:640px){
+  /* Layout & spacing */
   .camera-video{height:54vw;max-height:380px}
   .app-main{padding:12px}
   .btn.large{width:100%}
   .top-nav{gap:6px}
   body{font-size:15px}
-  .record-list{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+
+  /* Capture section: stack buttons and add breathing room */
+  .capture-section{gap:16px}
+  .capture-quick{flex-direction:column;gap:12px}
+  .capture-quick .btn{width:100%}
+
+  /* Records header: stack title and actions for clearer layout */
+  .records-header{flex-direction:column;align-items:flex-start;gap:12px}
+  .records-actions{display:flex;flex-direction:column;align-items:stretch;gap:12px;width:100%}
+  .records-actions .btn{width:100%}
+
+  /* Records list: single column, more padding, bigger thumbs */
+  .record-list{grid-template-columns:1fr;gap:12px}
+  .record-item{padding:12px;gap:12px}
+  .thumb{width:84px;height:84px}
+
   .camera-actions{flex-wrap:wrap}
 }
